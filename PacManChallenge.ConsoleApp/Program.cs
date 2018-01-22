@@ -19,6 +19,7 @@ namespace PacManChallenge.ConsoleApp
             var livesService = new LivesService();
             var pointsService = new PointsService();
             double ghostValue = 0;
+            double livesGained = 0;
 
             var actionsArray = actionsListing.GetActionsArray("C:\\DotNetProjects\\PacManChallenge\\PacManChallenge.Data\\katapacman-seq.csv");
 
@@ -35,18 +36,21 @@ namespace PacManChallenge.ConsoleApp
                 var deltaLives = livesService.GetDeltaLives(action, tempPoints);
                 pacMan.Lives += deltaLives;
                 if (deltaLives == 1)
+                {
                     tempPoints -= 10000;
+                    livesGained++;
+                }
                 if (pacMan.Lives < 1)
                     break;
                 Console.WriteLine(consumable.Name + deltaPoints);
             }
             if (pacMan.Lives < 1)
             {
-                Console.WriteLine($"Game over. You had {pacMan.Points} points.");
+                Console.WriteLine($"Game over. You had {pacMan.Points} points and gained {livesGained} extra lives.");
             }
             else
             {
-                Console.WriteLine($"You earned {pacMan.Points} points and ended the game with {pacMan.Lives} lives.");
+                Console.WriteLine($"You earned {pacMan.Points} points and ended the game with {pacMan.Lives} lives, with {livesGained} extra lives.");
             }
 
         }
