@@ -40,7 +40,14 @@ namespace PacManChallenge.ConsoleApp
                     break;
                 Console.WriteLine(consumable.Name + deltaPoints);
             }
-
+            if (pacMan.Lives < 1)
+            {
+                Console.WriteLine($"Game over. You had {pacMan.Points} points.");
+            }
+            else
+            {
+                Console.WriteLine($"You earned {pacMan.Points} points and ended the game with {pacMan.Lives} lives.");
+            }
 
         }
     }
